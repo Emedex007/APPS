@@ -22,6 +22,8 @@ extern g_suma
 
 extern g_str
 extern g_strlen
+
+extern g_max
 ;***************************************************************************
 
     section .text
@@ -36,6 +38,7 @@ extern g_strlen
 
     global suma_pole
     global my_strlen
+    global search_max
 
 suma_pole:
 
@@ -66,4 +69,24 @@ my_strlen:
     jmp .zpet
 .hotovo:
     mov [g_strlen], ecx     ; pozor, ne RCX
+    ret
+
+;---------------------------------------------------------------------
+
+search_max:
+    mov rdx, 0  ; i = 0
+    mov eax, [g_int_pole + 0 * 4]
+
+.zpet:
+    cmp rdx, 10     ; i >= 10
+    jge .hotovo     ; hotovo
+
+    cmp eax, [g_int_pole + rdx * 4]
+    jg .taknic
+    mov eax, [g_int_pole  + rdx * 4]
+.taknic:
+    inc rdx
+    jmp .zpet
+.hotovo:
+    mov [g_max], eax
     ret
