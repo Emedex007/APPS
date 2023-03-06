@@ -19,6 +19,9 @@
 ;g_some_asm_var dd ?
 extern g_int_pole
 extern g_suma
+
+extern g_str
+extern g_strlen
 ;***************************************************************************
 
     section .text
@@ -31,7 +34,8 @@ extern g_suma
 ;some_asm_function:
     ;ret
 
-global suma_pole
+    global suma_pole
+    global my_strlen
 
 suma_pole:
 
@@ -49,4 +53,17 @@ suma_pole:
     jmp .zpet
 .hotovo:
     mov [g_suma], eax
+    ret
+
+;----------------------------------------------------------------------
+
+my_strlen:
+    mov rcx, 0
+.zpet:    
+    cmp [g_str + rcx], byte 0
+    je .hotovo
+    inc rcx
+    jmp .zpet
+.hotovo:
+    mov [g_strlen], ecx     ; pozor, ne RCX
     ret
