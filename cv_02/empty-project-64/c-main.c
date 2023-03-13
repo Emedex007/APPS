@@ -16,15 +16,20 @@
 // type g_some_c_variable;
 void suma_pole();
 void my_strlen();
-void search_max();
+int search_max();
+void count_evens();
+void count_vowels();
 
 int g_int_pole [10] = {1,2,3,4,5,6,70,8,9,10};
 int g_suma;
 
 char g_str[] = "Nazdar programatori!";
+char g_char_array[32] = "testovaci pole pro cv2";
+char vowels[6] = "aeiouy";
 int g_strlen;
 
 int g_max;
+int num;
 
 int main()
 {
@@ -32,7 +37,7 @@ int main()
     printf("suma: %d\n", g_suma );
     my_strlen();
     printf("len: %d\n", g_strlen);
-    search_max();
-    printf("max: %d\n", g_max);
+    int l_max = search_max();       // vysledek ulozeny v eax
+    printf("max: %d  %d\n", g_max, l_max);
 
 }

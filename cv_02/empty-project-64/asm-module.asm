@@ -24,6 +24,10 @@ extern g_str
 extern g_strlen
 
 extern g_max
+
+extern num
+
+extern g_char_array
 ;***************************************************************************
 
     section .text
@@ -39,6 +43,8 @@ extern g_max
     global suma_pole
     global my_strlen
     global search_max
+    global count_evens
+    global count_vowels
 
 suma_pole:
 
@@ -89,4 +95,42 @@ search_max:
     jmp .zpet
 .hotovo:
     mov [g_max], eax
+    ret
+
+;-----------------------------------------------------------------------
+
+count_evens:
+    mov rax, 0
+    
+    mov eax, 1      ;maska
+    TEST [g_int_pole + rax * 4], eax
+
+;---------------------------------------------------------------------
+
+count_vowels:
+    mov rdx, 0      ; i = 0
+    mov rax, 0      ; k = 0
+    mov eax, [g_char_array + 0]
+
+.dalsi:
+    cmp rdx, 32
+    jge .hototvo
+
+    cmp rax, 6
+    jge .dalsi
+
+.sem:
+    mov al, [vowels + rax]
+    cmp [g_char_array + rdx], al
+    je .samohlaska
+    inc rax
+    jmp .sem
+
+.samohlaska:
+    inc num
+    inc rdx
+    mov rax, 0
+    jmp .dalsi
+
+.hotovo:
     ret
