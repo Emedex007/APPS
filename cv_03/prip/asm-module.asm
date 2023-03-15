@@ -31,3 +31,45 @@
     ;ret
 
 
+
+    global str_merge_diff
+str_merge_diff:
+    enter 0,0
+.zpet:
+    cmp [rdi], byte 0
+    je .hotovo
+
+
+    mov r10, [rdi]
+    cmp [rsi], r10
+    je .taknic
+
+    mov r9, [rsi]
+    mov [rdx], r9
+    inc rdi
+    inc rsi
+    inc rdx
+    jmp .zpet
+
+.taknic:
+    inc rdi
+    inc rsi
+    jmp .zpet
+
+.hotovo:
+    leave
+    ret
+
+    global hamm_dist
+hamm_dist:
+    enter 0,0
+    
+    cmp rdi, 0
+    jl .hotovo
+
+    mov r10, [rdi]
+    cmp [rsi], r10
+
+.hotovo:
+    leave
+    ret
